@@ -58,370 +58,392 @@
 
 % START START START START START START START START START START START START START
 
-\begin{frame}{The DSI and the 11th Hour Project}
-\begin{itemize}
-\item The University of Chicago's Data Science Institute (DSI) partners with the Schmidt Family Foundation's \textbf{11th Hour Project} to support mission-driven organizations.
-\item 11th Hour Project grantees span renewable energy, resilient food systems, healthy oceans, and the protection of human rights.
-\item The DSI contributes statistical and computational expertise to turn data into action for these partners.
-\item This talk is one case study: a collaboration with the Occidental Arts \& Ecology Center (OAEC).
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Fuels to Flows: solving two problems at once}
-\includegraphics[width=0.1\linewidth]{img/fuels-to-flows-logo.png}
+\begin{frame}{Who am I?}
+\large
+\vspace{0.25 cm}
 \begin{columns}
-\column{0.2\linewidth}
-\textcolor{blue}{Removing ladder fuels that cause forest fires.}
-\column{0.6\linewidth}
-\includegraphics[width=\linewidth]{img/fuels-to-flows1.png}
-\column{0.2\linewidth}
-\textcolor{blue}{Stuffing gullies to decrease erosion.}
+\column{0.65\linewidth}
+\begin{itemize}\setlength{\itemsep}{0.5 cm}
+\item Data engineer at the University of Chicago's Data Science Institute (DSI)
+\item Member of the DSI's 11th Hour team
+\item Former developer of Awkward Array and Scikit-HEP Python packages
+\item Former-former particle physicist
+\end{itemize}
+
+\column{0.3\linewidth}
+\includegraphics[width=\linewidth]{img/jim_pivarski.jpg}
 \end{columns}
 \end{frame}
 
-\begin{frame}{Fuels to Flows: solving two problems at once}
-\includegraphics[width=0.1\linewidth]{img/fuels-to-flows-logo.png}
-\includegraphics[width=\linewidth]{img/fuels-to-flows2.png}
+\begin{frame}{How did I end up searching for gullies?}
+\vspace{0.15 cm}
+\only<1>{\includegraphics[width=0.93\linewidth]{img/uchicago-dsi-11th-hour-6.pdf}}\only<2>{\includegraphics[width=0.93\linewidth]{img/uchicago-dsi-11th-hour-5.pdf}}\only<3>{\includegraphics[width=0.93\linewidth]{img/uchicago-dsi-11th-hour-4.pdf}}\only<4>{\includegraphics[width=0.93\linewidth]{img/uchicago-dsi-11th-hour-3.pdf}}\only<5>{\includegraphics[width=0.93\linewidth]{img/uchicago-dsi-11th-hour-2.pdf}}\only<6>{\includegraphics[width=0.93\linewidth]{img/uchicago-dsi-11th-hour-1.pdf}}\only<7>{\includegraphics[width=0.93\linewidth]{img/uchicago-dsi-11th-hour.pdf}}
 \end{frame}
 
-\begin{frame}{Expanding the Fuels to Flows program}
-\includegraphics[width=0.1\linewidth]{img/fuels-to-flows-logo.png}
-\begin{columns}
-\column{0.4\linewidth}
-\includegraphics[width=\linewidth]{img/oaec-site.png}
-\column{0.6\linewidth}
-\begin{itemize}
-\item Fuels to Flows has already been implemented at the Occidental Arts \& Ecology Center (OAEC) and Monte Rio National Park.
-\item Program Director \textbf{Brock Dolman} was inspired by the use of LIDAR to find lost meadows and proposed a ``found gully'' project to find new sites for Fuels to Flows by air.
-\item That's how we at the DSI got involved: we developed a model to find gullies and as well as other tools to discover new Fuels to Flows sites.
-\end{itemize}
-\includegraphics[width=0.3\linewidth]{img/brock.jpg}
-\end{columns}
-\end{frame}
+%% \begin{frame}{The DSI and the 11th Hour Project}
+%% \begin{itemize}
+%% \item The University of Chicago's Data Science Institute (DSI) partners with the Schmidt Family Foundation's \textbf{11th Hour Project} to support mission-driven organizations.
+%% \item 11th Hour Project grantees span renewable energy, resilient food systems, healthy oceans, and the protection of human rights.
+%% \item The DSI contributes statistical and computational expertise to turn data into action for these partners.
+%% \item This talk is one case study: a collaboration with the Occidental Arts \& Ecology Center (OAEC).
+%% \end{itemize}
+%% \end{frame}
 
-\begin{frame}
-\vfill
-\begin{center}
-{\Huge Finding gullies}
-\end{center}
-\vfill
-\end{frame}
+%% \begin{frame}{Fuels to Flows: solving two problems at once}
+%% \includegraphics[width=0.1\linewidth]{img/fuels-to-flows-logo.png}
+%% \begin{columns}
+%% \column{0.2\linewidth}
+%% \textcolor{blue}{Removing ladder fuels that cause forest fires.}
+%% \column{0.6\linewidth}
+%% \includegraphics[width=\linewidth]{img/fuels-to-flows1.png}
+%% \column{0.2\linewidth}
+%% \textcolor{blue}{Stuffing gullies to decrease erosion.}
+%% \end{columns}
+%% \end{frame}
 
-\begin{frame}{Where are the gullies? --- aerial photography}
-\includegraphics[width=\linewidth]{img/gullies-aerial.png}
-\end{frame}
+%% \begin{frame}{Fuels to Flows: solving two problems at once}
+%% \includegraphics[width=0.1\linewidth]{img/fuels-to-flows-logo.png}
+%% \includegraphics[width=\linewidth]{img/fuels-to-flows2.png}
+%% \end{frame}
 
-\begin{frame}{Where are the gullies? --- LIDAR hillshade without trees}
-\includegraphics[width=\linewidth]{img/gullies-lidar.png}
-\end{frame}
+%% \begin{frame}{Expanding the Fuels to Flows program}
+%% \includegraphics[width=0.1\linewidth]{img/fuels-to-flows-logo.png}
+%% \begin{columns}
+%% \column{0.4\linewidth}
+%% \includegraphics[width=\linewidth]{img/oaec-site.png}
+%% \column{0.6\linewidth}
+%% \begin{itemize}
+%% \item Fuels to Flows has already been implemented at the Occidental Arts \& Ecology Center (OAEC) and Monte Rio National Park.
+%% \item Program Director \textbf{Brock Dolman} was inspired by the use of LIDAR to find lost meadows and proposed a ``found gully'' project to find new sites for Fuels to Flows by air.
+%% \item That's how we at the DSI got involved: we developed a model to find gullies and as well as other tools to discover new Fuels to Flows sites.
+%% \end{itemize}
+%% \includegraphics[width=0.3\linewidth]{img/brock.jpg}
+%% \end{columns}
+%% \end{frame}
 
-\begin{frame}{Where are the gullies? --- our gully-finding algorithm}
-\includegraphics[width=\linewidth]{img/gullies-detected.png}
-\end{frame}
+%% \begin{frame}
+%% \vfill
+%% \begin{center}
+%% {\Huge Finding gullies}
+%% \end{center}
+%% \vfill
+%% \end{frame}
 
-\begin{frame}{Color-enhanced hillshade}
-\includegraphics[width=\linewidth]{img/banner.png}
+%% \begin{frame}{Where are the gullies? --- aerial photography}
+%% \includegraphics[width=\linewidth]{img/gullies-aerial.png}
+%% \end{frame}
 
-\vspace{0.3 cm}
-A separable frequency-domain filter (suggested by Adam Cummings) makes creases in the landscape more visible by eye:
-\[
-I_{\mathrm{out}} = \mathcal{F}^{-1}_x\!\left[(u^2)^\alpha \,\mathcal{F}_x(I_{\mathrm{in}})\right] +
-\mathcal{F}^{-1}_y\!\left[(v^2)^\alpha \,\mathcal{F}_y(I_{\mathrm{in}})\right]
-\]
-implemented with \texttt{scipy.fft}, then colorized and blended with a grayscale hillshade.
-\end{frame}
+%% \begin{frame}{Where are the gullies? --- LIDAR hillshade without trees}
+%% \includegraphics[width=\linewidth]{img/gullies-lidar.png}
+%% \end{frame}
 
-\begin{frame}{Publicly available LIDAR for all of Sonoma County, CA}
-\begin{columns}
-\column{0.4\linewidth}
-\includegraphics[width=\linewidth]{img/sonomavegmap.png}
-\column{0.6\linewidth}
-\begin{itemize}
-\item Digital Elevation Model (DEM)
-\begin{itemize}
-\item absolute elevation above sea level
-\item in a grid of pixels: $\frac{1}{2}$ meter $\times$ $\frac{1}{2}$ meter
-\item complete map in 2013 and 2022
-\end{itemize}
-\item Ladder fuel proxies
-\begin{itemize}
-\item (material in 1--4 m) / (material in 0--4 m)
-\item (material in 1--8 m) / (material in 0--8 m)
-\end{itemize}
-\end{itemize}
-\end{columns}
-\end{frame}
+%% \begin{frame}{Where are the gullies? --- our gully-finding algorithm}
+%% \includegraphics[width=\linewidth]{img/gullies-detected.png}
+%% \end{frame}
 
-\begin{frame}{Standard technique: difference from mean elevation}
-\begin{columns}
-\column{0.4\linewidth}
-\includegraphics[width=\linewidth]{img/diff-mean-elevation.png}
+%% \begin{frame}{Color-enhanced hillshade}
+%% \includegraphics[width=\linewidth]{img/banner.png}
 
-\textcolor{red}{Red: known gullies on OAEC site}
-\column{0.6\linewidth}
-\begin{itemize}
-\item For example, \href{https://onlinelibrary.wiley.com/doi/epdf/10.1002/esp.1918}{DOI 10.1002/esp.1918}.
-\item A gully is an indentation in the ground.
-\begin{itemize}
-\item Subtract the absolute elevation of each pixel from the average in a 50 meter radius.
-\end{itemize}
-\item Reliably highlights the locations of known gullies on the OAEC site.
-\end{itemize}
-\end{columns}
-\end{frame}
+%% \vspace{0.3 cm}
+%% A separable frequency-domain filter (suggested by Adam Cummings) makes creases in the landscape more visible by eye:
+%% \[
+%% I_{\mathrm{out}} = \mathcal{F}^{-1}_x\!\left[(u^2)^\alpha \,\mathcal{F}_x(I_{\mathrm{in}})\right] +
+%% \mathcal{F}^{-1}_y\!\left[(v^2)^\alpha \,\mathcal{F}_y(I_{\mathrm{in}})\right]
+%% \]
+%% implemented with \texttt{scipy.fft}, then colorized and blended with a grayscale hillshade.
+%% \end{frame}
 
-\begin{frame}{Note that procedure is a convolution!}
-Convolution kernel:
-\begin{columns}
-\column{0.5\linewidth}
-\includegraphics[width=0.7\linewidth]{img/diff-mean-as-kernel.png}
+%% \begin{frame}{Publicly available LIDAR for all of Sonoma County, CA}
+%% \begin{columns}
+%% \column{0.4\linewidth}
+%% \includegraphics[width=\linewidth]{img/sonomavegmap.png}
+%% \column{0.6\linewidth}
+%% \begin{itemize}
+%% \item Digital Elevation Model (DEM)
+%% \begin{itemize}
+%% \item absolute elevation above sea level
+%% \item in a grid of pixels: $\frac{1}{2}$ meter $\times$ $\frac{1}{2}$ meter
+%% \item complete map in 2013 and 2022
+%% \end{itemize}
+%% \item Ladder fuel proxies
+%% \begin{itemize}
+%% \item (material in 1--4 m) / (material in 0--4 m)
+%% \item (material in 1--8 m) / (material in 0--8 m)
+%% \end{itemize}
+%% \end{itemize}
+%% \end{columns}
+%% \end{frame}
 
-\textcolor{darkorange}{Positive central pixel}
+%% \begin{frame}{Standard technique: difference from mean elevation}
+%% \begin{columns}
+%% \column{0.4\linewidth}
+%% \includegraphics[width=\linewidth]{img/diff-mean-elevation.png}
 
-\textcolor{darkorange}{Negative disk}
+%% \textcolor{red}{Red: known gullies on OAEC site}
+%% \column{0.6\linewidth}
+%% \begin{itemize}
+%% \item For example, \href{https://onlinelibrary.wiley.com/doi/epdf/10.1002/esp.1918}{DOI 10.1002/esp.1918}.
+%% \item A gully is an indentation in the ground.
+%% \begin{itemize}
+%% \item Subtract the absolute elevation of each pixel from the average in a 50 meter radius.
+%% \end{itemize}
+%% \item Reliably highlights the locations of known gullies on the OAEC site.
+%% \end{itemize}
+%% \end{columns}
+%% \end{frame}
 
-\textcolor{darkorange}{Sum = 0}
-\column{0.5\linewidth}
-\begin{center}
-\includegraphics[width=0.22\linewidth]{img/hillshade-crop-input.png}\,{\Large $\ast$}\,%
-\includegraphics[width=0.18\linewidth]{img/diff-mean-as-kernel.png}\,{\Large $=$}\,%
-\includegraphics[width=0.22\linewidth]{img/diff-mean-elevation.png}
-\end{center}
+%% \begin{frame}{Note that procedure is a convolution!}
+%% Convolution kernel:
+%% \begin{columns}
+%% \column{0.5\linewidth}
+%% \includegraphics[width=0.7\linewidth]{img/diff-mean-as-kernel.png}
 
-{\small input $\ast$ kernel $=$ output --- no animation needed, just \texttt{scipy.signal.convolve2d}.}
-\end{columns}
-\end{frame}
+%% \textcolor{darkorange}{Positive central pixel}
 
-\begin{frame}{What if we used a convolution kernel \textit{shaped} like a gully?}
-Convolution kernels:
-\begin{columns}
-\column{0.4\linewidth}
-\includegraphics[width=\linewidth]{img/trough-convolutions.png}
-\column{0.6\linewidth}
-\includegraphics[width=\linewidth]{img/orientation-aware-gullies.png}
+%% \textcolor{darkorange}{Negative disk}
 
-\textcolor{red}{Red: known gullies}
+%% \textcolor{darkorange}{Sum = 0}
+%% \column{0.5\linewidth}
+%% \begin{center}
+%% \includegraphics[width=0.22\linewidth]{img/hillshade-crop-input.png}\,{\Large $\ast$}\,%
+%% \includegraphics[width=0.18\linewidth]{img/diff-mean-as-kernel.png}\,{\Large $=$}\,%
+%% \includegraphics[width=0.22\linewidth]{img/diff-mean-elevation.png}
+%% \end{center}
 
-\textcolor{darkgreen}{Green: east-west indentation}
+%% {\small input $\ast$ kernel $=$ output --- no animation needed, just \texttt{scipy.signal.convolve2d}.}
+%% \end{columns}
+%% \end{frame}
 
-\textcolor{darkblue}{Blue: north-south indentation}
-\end{columns}
-\end{frame}
+%% \begin{frame}{What if we used a convolution kernel \textit{shaped} like a gully?}
+%% Convolution kernels:
+%% \begin{columns}
+%% \column{0.4\linewidth}
+%% \includegraphics[width=\linewidth]{img/trough-convolutions.png}
+%% \column{0.6\linewidth}
+%% \includegraphics[width=\linewidth]{img/orientation-aware-gullies.png}
 
-\begin{frame}{One-sided cliffs fool the trough kernel}
-\begin{columns}
-\column{0.4\linewidth}
-\includegraphics[width=\linewidth]{img/kernel-cliff-veto.png}
-\column{0.6\linewidth}
-\begin{itemize}
-\item Convolutions with the trough kernel also fire on one-sided cliffs --- usually artificial cliffs along roadsides --- since a cliff matches one side of a trough.
-\item As a veto, we add another kernel that only matches one-sided cliffs: a positive Gaussian on one side of an angled line, negative on the other.
-\item Positive weight on trough convolutions and negative weight on cliff convolutions distinguishes troughs from cliffs.
-\end{itemize}
-\end{columns}
-\end{frame}
+%% \textcolor{red}{Red: known gullies}
 
-\begin{frame}{Developing a model}
-\begin{itemize}
-\item This reasoning ultimately leads to a Convolutional Neural Network (CNN).
-\begin{itemize}
-\item Rather than building a set of convolution kernels by hand, they'd be learned.
-\item As a supervised learning technique, a CNN would require hand-labeled training data.
-\end{itemize}
-\item We can label some gullies by hand, but not enough to train a CNN.
-\includegraphics[width=0.3\linewidth]{img/manual-labeling.png}
-\item Compromise:
-\begin{itemize}
-\item We hand-draw gully labels for training data (in-gully, out-of-gully, and unknown) in 9 watersheds.
-\item We engineer convolution kernels as features (different segment lengths; anti-cliff veto).
-\item Perform logistic regression, which is equivalent to a single CNN layer (with sigmoid activation).
-\end{itemize}
-\end{itemize}
-\end{frame}
+%% \textcolor{darkgreen}{Green: east-west indentation}
 
-\begin{frame}{Gully probability model}
-\begin{columns}
-\column{0.5\linewidth}
-\begin{itemize}
-\item Just 7 features
-\item Predicts billions of pixels
-\item Low correlation among the features:
+%% \textcolor{darkblue}{Blue: north-south indentation}
+%% \end{columns}
+%% \end{frame}
 
-\includegraphics[width=\linewidth]{img/correlation-matrix.png}
-\item Minimized loss function $\to$
-\end{itemize}
-\column{0.5\linewidth}
-\includegraphics[width=\linewidth]{img/residuals.png}
-\end{columns}
-\end{frame}
+%% \begin{frame}{One-sided cliffs fool the trough kernel}
+%% \begin{columns}
+%% \column{0.4\linewidth}
+%% \includegraphics[width=\linewidth]{img/kernel-cliff-veto.png}
+%% \column{0.6\linewidth}
+%% \begin{itemize}
+%% \item Convolutions with the trough kernel also fire on one-sided cliffs --- usually artificial cliffs along roadsides --- since a cliff matches one side of a trough.
+%% \item As a veto, we add another kernel that only matches one-sided cliffs: a positive Gaussian on one side of an angled line, negative on the other.
+%% \item Positive weight on trough convolutions and negative weight on cliff convolutions distinguishes troughs from cliffs.
+%% \end{itemize}
+%% \end{columns}
+%% \end{frame}
 
-\begin{frame}{Second layer of the ``CNN''}
-\begin{itemize}
-\item To reduce noise and increase connectivity between real gullies:
-\begin{itemize}
-\item Pooling: scale gully probability image down by a factor of 2 on each side.
-\item Second convolution: use angled kernels again to connect islands.
-\end{itemize}
-\end{itemize}
-\includegraphics[width=\linewidth]{img/gully-finding-quality.png}
+%% \begin{frame}{Developing a model}
+%% \begin{itemize}
+%% \item This reasoning ultimately leads to a Convolutional Neural Network (CNN).
+%% \begin{itemize}
+%% \item Rather than building a set of convolution kernels by hand, they'd be learned.
+%% \item As a supervised learning technique, a CNN would require hand-labeled training data.
+%% \end{itemize}
+%% \item We can label some gullies by hand, but not enough to train a CNN.
+%% \includegraphics[width=0.3\linewidth]{img/manual-labeling.png}
+%% \item Compromise:
+%% \begin{itemize}
+%% \item We hand-draw gully labels for training data (in-gully, out-of-gully, and unknown) in 9 watersheds.
+%% \item We engineer convolution kernels as features (different segment lengths; anti-cliff veto).
+%% \item Perform logistic regression, which is equivalent to a single CNN layer (with sigmoid activation).
+%% \end{itemize}
+%% \end{itemize}
+%% \end{frame}
 
-{\small (a) color-enhanced hillshade; (b) DFME; (c) DFME connected components; (d) two-layer trough convolution; (e) its connected components.}
-\end{frame}
+%% \begin{frame}{Gully probability model}
+%% \begin{columns}
+%% \column{0.5\linewidth}
+%% \begin{itemize}
+%% \item Just 7 features
+%% \item Predicts billions of pixels
+%% \item Low correlation among the features:
 
-\begin{frame}
-\vfill
-\begin{center}
-{\Huge Performance optimization with Numba}
-\end{center}
-\vfill
-\end{frame}
+%% \includegraphics[width=\linewidth]{img/correlation-matrix.png}
+%% \item Minimized loss function $\to$
+%% \end{itemize}
+%% \column{0.5\linewidth}
+%% \includegraphics[width=\linewidth]{img/residuals.png}
+%% \end{columns}
+%% \end{frame}
 
-\begin{frame}{Convolving hundreds of gigabytes with unusually large kernels}
-\begin{itemize}
-\item Typical image convolution kernels are $3\times 3$ through $11\times 11$ pixels.
-\item Ours need to be at least 50 meters on a side to average over enough surrounding elevation: $101\times 101$ pixels.
-\item \texttt{scipy.signal.convolve2d} was too slow for exploratory work at county scale.
-\item GPU drop-in replacements from CuPy and JAX were faster, but still not the fastest.
-\end{itemize}
+%% \begin{frame}{Second layer of the ``CNN''}
+%% \begin{itemize}
+%% \item To reduce noise and increase connectivity between real gullies:
+%% \begin{itemize}
+%% \item Pooling: scale gully probability image down by a factor of 2 on each side.
+%% \item Second convolution: use angled kernels again to connect islands.
+%% \end{itemize}
+%% \end{itemize}
+%% \includegraphics[width=\linewidth]{img/gully-finding-quality.png}
 
-\vspace{0.3 cm}
-{\ttfamily\small
-\textcolor{darkgrey}{TODO: paste real code}\\
-from scipy.signal import convolve2d\\
-convolved = convolve2d(elevation, kernel, mode="same")
-}
-\end{frame}
+%% {\small (a) color-enhanced hillshade; (b) DFME; (c) DFME connected components; (d) two-layer trough convolution; (e) its connected components.}
+%% \end{frame}
 
-\begin{frame}{A custom CUDA kernel with Numba}
-\begin{itemize}
-\item The fastest option: a custom CUDA kernel compiled by Numba.
-\item Fix the kernel size at compile time and simplify boundary conditions.
-\item Process one watershed at a time: pad, convolve, then clip to the watershed (gullies cannot cross a watershed divide).
-\end{itemize}
+%% \begin{frame}
+%% \vfill
+%% \begin{center}
+%% {\Huge Performance optimization with Numba}
+%% \end{center}
+%% \vfill
+%% \end{frame}
 
-\vspace{0.3 cm}
-{\ttfamily\small
-\textcolor{darkgrey}{TODO: paste real code}\\
-from numba import cuda\\[2mm]
-@cuda.jit\\
-def convolve\_kernel(image, kernel, out):\\
-\hspace{1em}...
-}
-\end{frame}
+%% \begin{frame}{Convolving hundreds of gigabytes with unusually large kernels}
+%% \begin{itemize}
+%% \item Typical image convolution kernels are $3\times 3$ through $11\times 11$ pixels.
+%% \item Ours need to be at least 50 meters on a side to average over enough surrounding elevation: $101\times 101$ pixels.
+%% \item \texttt{scipy.signal.convolve2d} was too slow for exploratory work at county scale.
+%% \item GPU drop-in replacements from CuPy and JAX were faster, but still not the fastest.
+%% \end{itemize}
 
-\begin{frame}{Numba for skeletonization, too}
-\begin{itemize}
-\item Scikit-Image's skeletonization methods apply to bitmaps, discarding the gully-probability information.
-\item We implemented a distance-ordered homotopic thinning algorithm (inspired by Pudney) as a custom Numba CUDA kernel.
-\item Pixels are eroded greedily in order of increasing probability, rather than distance.
-\item Connectivity is preserved as a constraint, ensuring that all gullies remain trees.
-\end{itemize}
-\end{frame}
+%% \vspace{0.3 cm}
+%% {\ttfamily\small
+%% \textcolor{darkgrey}{TODO: paste real code}\\
+%% from scipy.signal import convolve2d\\
+%% convolved = convolve2d(elevation, kernel, mode="same")
+%% }
+%% \end{frame}
 
-\begin{frame}{Final output: a road network/graph}
-\includegraphics[width=\linewidth]{img/skeletonization-and-graph-building.png}
+%% \begin{frame}{A custom CUDA kernel with Numba}
+%% \begin{itemize}
+%% \item The fastest option: a custom CUDA kernel compiled by Numba.
+%% \item Fix the kernel size at compile time and simplify boundary conditions.
+%% \item Process one watershed at a time: pad, convolve, then clip to the watershed (gullies cannot cross a watershed divide).
+%% \end{itemize}
 
-{\small Left: skeletonization by probability-ordered erosion. Right: connecting the remaining pixels as a graph.}
-\end{frame}
+%% \vspace{0.3 cm}
+%% {\ttfamily\small
+%% \textcolor{darkgrey}{TODO: paste real code}\\
+%% from numba import cuda\\[2mm]
+%% @cuda.jit\\
+%% def convolve\_kernel(image, kernel, out):\\
+%% \hspace{1em}...
+%% }
+%% \end{frame}
 
-\begin{frame}{Synergy with the DSI Clinic}
-\includegraphics[width=0.2\linewidth]{img/jose-cardona.jpg}
-\begin{itemize}
-\item Jos\'e Cardona is a masters student in Computational Analysis \& Public Policy who took the DSI Clinic in Fall '25.
-\item His project team was analyzing the graph structure of blood vessels in breast cancer MRIs, advised by Anna Woodard and Jim Pivarski (me).
-\item He generalized the centerline $\to$ graph algorithm to 3D so that it could be applied to get a 3D graph of blood vessels, rather than a 2D graph of gullies.
-\end{itemize}
-\begin{columns}
-\column{0.5\linewidth}
-\includegraphics[width=\linewidth]{img/multidim-centerline.png}
-\column{0.5\linewidth}
-\includegraphics[width=\linewidth]{img/blood-vessels.png}
-\end{columns}
-\end{frame}
+%% \begin{frame}{Numba for skeletonization, too}
+%% \begin{itemize}
+%% \item Scikit-Image's skeletonization methods apply to bitmaps, discarding the gully-probability information.
+%% \item We implemented a distance-ordered homotopic thinning algorithm (inspired by Pudney) as a custom Numba CUDA kernel.
+%% \item Pixels are eroded greedily in order of increasing probability, rather than distance.
+%% \item Connectivity is preserved as a constraint, ensuring that all gullies remain trees.
+%% \end{itemize}
+%% \end{frame}
 
-\begin{frame}
-\vfill
-\begin{center}
-{\Huge Delivering results to OAEC}
-\end{center}
-\vfill
-\end{frame}
+%% \begin{frame}{Final output: a road network/graph}
+%% \includegraphics[width=\linewidth]{img/skeletonization-and-graph-building.png}
 
-\begin{frame}{Scale of the data products}
-{\small
-\begin{itemize}
-\item Land ownership boundaries --- PMTile --- 27 MB
-\item Ladder fuel proxies --- PMTile, GeoTIFF --- 115 GB
-\item Greyscale hillshade --- PMTile, GeoTIFF --- 2.9 GB
-\item Color-enhanced hillshade --- PMTile, GeoTIFF --- 149 GB
-\item Elevation contours --- PMTile, GeoJSON --- 18 GB
-\item Elevation difference --- PMTile, GeoTIFF --- 5.7 GB
-\item Elevation difference contours --- PMTile, GeoJSON --- 12 GB
-\item Detected gully network --- PMTile, Parquet --- 34 GB
-\item Elevation 2013 \& 2022 --- PMTile, GeoTIFF --- 22 GB
-\item \textbf{Total: 386 GB}
-\end{itemize}
-}
+%% {\small Left: skeletonization by probability-ordered erosion. Right: connecting the remaining pixels as a graph.}
+%% \end{frame}
 
-\vspace{0.3 cm}
-We made \href{https://github.com/dsi-clinic/gully-map}{all of this available on GitHub} for GIS experts, but
+%% \begin{frame}{Synergy with the DSI Clinic}
+%% \includegraphics[width=0.2\linewidth]{img/jose-cardona.jpg}
+%% \begin{itemize}
+%% \item Jos\'e Cardona is a masters student in Computational Analysis \& Public Policy who took the DSI Clinic in Fall '25.
+%% \item His project team was analyzing the graph structure of blood vessels in breast cancer MRIs, advised by Anna Woodard and Jim Pivarski (me).
+%% \item He generalized the centerline $\to$ graph algorithm to 3D so that it could be applied to get a 3D graph of blood vessels, rather than a 2D graph of gullies.
+%% \end{itemize}
+%% \begin{columns}
+%% \column{0.5\linewidth}
+%% \includegraphics[width=\linewidth]{img/multidim-centerline.png}
+%% \column{0.5\linewidth}
+%% \includegraphics[width=\linewidth]{img/blood-vessels.png}
+%% \end{columns}
+%% \end{frame}
 
-\begin{itemize}
-\item not all users are likely to be experts;
-\item some of these files are huge.
-\end{itemize}
-\end{frame}
+%% \begin{frame}
+%% \vfill
+%% \begin{center}
+%% {\Huge Delivering results to OAEC}
+%% \end{center}
+%% \vfill
+%% \end{frame}
 
-\begin{frame}{Instead, we built a specialized map webapp}
-\includegraphics[width=\linewidth]{img/dashboard.png}
+%% \begin{frame}{Scale of the data products}
+%% {\small
+%% \begin{itemize}
+%% \item Land ownership boundaries --- PMTile --- 27 MB
+%% \item Ladder fuel proxies --- PMTile, GeoTIFF --- 115 GB
+%% \item Greyscale hillshade --- PMTile, GeoTIFF --- 2.9 GB
+%% \item Color-enhanced hillshade --- PMTile, GeoTIFF --- 149 GB
+%% \item Elevation contours --- PMTile, GeoJSON --- 18 GB
+%% \item Elevation difference --- PMTile, GeoTIFF --- 5.7 GB
+%% \item Elevation difference contours --- PMTile, GeoJSON --- 12 GB
+%% \item Detected gully network --- PMTile, Parquet --- 34 GB
+%% \item Elevation 2013 \& 2022 --- PMTile, GeoTIFF --- 22 GB
+%% \item \textbf{Total: 386 GB}
+%% \end{itemize}
+%% }
 
-{\small A static, client-side Svelte frontend --- no application server required.}
-\end{frame}
+%% \vspace{0.3 cm}
+%% We made \href{https://github.com/dsi-clinic/gully-map}{all of this available on GitHub} for GIS experts, but
 
-\begin{frame}
-\vfill
-\begin{center}
-{\Huge switch to \href{https://gully-map.uchicago-dsi.org}{live demo}}
-\end{center}
-\vfill
-\end{frame}
+%% \begin{itemize}
+%% \item not all users are likely to be experts;
+%% \item some of these files are huge.
+%% \end{itemize}
+%% \end{frame}
 
-\begin{frame}{Technical highlight}
-\begin{columns}
-\column{0.55\linewidth}
-\begin{itemize}
-\item For performance, the visible layers are delivered on demand as tiles.
-\item No server required: the PMTiles file format is addressable one tile at a time, served statically from Cloudflare.
-\item The ``volume of erosion'' and ``elevation along line'' features also use PMTiles to download elevation data one tile at a time.
-\begin{itemize}
-\item But elevation data needs float32 precision, and PMTiles must be RGBA images.
-\item So we bit-cast the four 8-bit channels as a 32-bit float.
-\end{itemize}
-\end{itemize}
+%% \begin{frame}{Instead, we built a specialized map webapp}
+%% \includegraphics[width=\linewidth]{img/dashboard.png}
 
-{\ttfamily\scriptsize
-\textcolor{darkgrey}{TODO: paste real code}\\
-rgba = elevation.astype(">f4").view("u1")
-}
-\column{0.45\linewidth}
-\includegraphics[width=\linewidth]{img/pmtiles-bitcast.png}
-\end{columns}
-\end{frame}
+%% {\small A static, client-side Svelte frontend --- no application server required.}
+%% \end{frame}
 
-\begin{frame}{Takeaways}
-\begin{itemize}
-\item A practical middle ground between simple filters and deep learning when labels are scarce.
-\item How to insert a custom optimization with Numba when standard functions (\texttt{convolve2d} in various libraries) restrict performance due to unusual conditions.
-\item How to deliver large maps in tiles without requiring a custom server.
-\end{itemize}
-\end{frame}
+%% \begin{frame}
+%% \vfill
+%% \begin{center}
+%% {\Huge switch to \href{https://gully-map.uchicago-dsi.org}{live demo}}
+%% \end{center}
+%% \vfill
+%% \end{frame}
 
-\begin{frame}
-\vfill
-\begin{center}
-{\Huge Questions?}
-\end{center}
-\vfill
-\end{frame}
+%% \begin{frame}{Technical highlight}
+%% \begin{columns}
+%% \column{0.55\linewidth}
+%% \begin{itemize}
+%% \item For performance, the visible layers are delivered on demand as tiles.
+%% \item No server required: the PMTiles file format is addressable one tile at a time, served statically from Cloudflare.
+%% \item The ``volume of erosion'' and ``elevation along line'' features also use PMTiles to download elevation data one tile at a time.
+%% \begin{itemize}
+%% \item But elevation data needs float32 precision, and PMTiles must be RGBA images.
+%% \item So we bit-cast the four 8-bit channels as a 32-bit float.
+%% \end{itemize}
+%% \end{itemize}
+
+%% {\ttfamily\scriptsize
+%% \textcolor{darkgrey}{TODO: paste real code}\\
+%% rgba = elevation.astype(">f4").view("u1")
+%% }
+%% \column{0.45\linewidth}
+%% \includegraphics[width=\linewidth]{img/pmtiles-bitcast.png}
+%% \end{columns}
+%% \end{frame}
+
+%% \begin{frame}{Takeaways}
+%% \begin{itemize}
+%% \item A practical middle ground between simple filters and deep learning when labels are scarce.
+%% \item How to insert a custom optimization with Numba when standard functions (\texttt{convolve2d} in various libraries) restrict performance due to unusual conditions.
+%% \item How to deliver large maps in tiles without requiring a custom server.
+%% \end{itemize}
+%% \end{frame}
+
+%% \begin{frame}
+%% \vfill
+%% \begin{center}
+%% {\Huge Questions?}
+%% \end{center}
+%% \vfill
+%% \end{frame}
 
 \end{document}
