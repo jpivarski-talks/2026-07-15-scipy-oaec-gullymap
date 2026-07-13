@@ -1,4 +1,5 @@
 \pdfminorversion=4
+\pdfobjcompresslevel=0
 \documentclass[aspectratio=169]{beamer}
 
 \mode<presentation>
@@ -11,7 +12,7 @@
   \setbeamertemplate{footline}[frame number]  % or "page number"
   \setbeamercolor{frametitle}{fg=white}
   \setbeamercolor{footline}{fg=black}
-} 
+}
 
 \usepackage[english]{babel}
 \usepackage{inputenc}
@@ -56,6 +57,15 @@
 %\end{frame}
 
 % START START START START START START START START START START START START START
+
+\begin{frame}{The DSI and the 11th Hour Project}
+\begin{itemize}
+\item The University of Chicago's Data Science Institute (DSI) partners with the Schmidt Family Foundation's \textbf{11th Hour Project} to support mission-driven organizations.
+\item 11th Hour Project grantees span renewable energy, resilient food systems, healthy oceans, and the protection of human rights.
+\item The DSI contributes statistical and computational expertise to turn data into action for these partners.
+\item This talk is one case study: a collaboration with the Occidental Arts \& Ecology Center (OAEC).
+\end{itemize}
+\end{frame}
 
 \begin{frame}{Fuels to Flows: solving two problems at once}
 \includegraphics[width=0.1\linewidth]{img/fuels-to-flows-logo.png}
@@ -109,6 +119,18 @@
 \includegraphics[width=\linewidth]{img/gullies-detected.png}
 \end{frame}
 
+\begin{frame}{Color-enhanced hillshade}
+\includegraphics[width=\linewidth]{img/banner.png}
+
+\vspace{0.3 cm}
+A separable frequency-domain filter (suggested by Adam Cummings) makes creases in the landscape more visible by eye:
+\[
+I_{\mathrm{out}} = \mathcal{F}^{-1}_x\!\left[(u^2)^\alpha \,\mathcal{F}_x(I_{\mathrm{in}})\right] +
+\mathcal{F}^{-1}_y\!\left[(v^2)^\alpha \,\mathcal{F}_y(I_{\mathrm{in}})\right]
+\]
+implemented with \texttt{scipy.fft}, then colorized and blended with a grayscale hillshade.
+\end{frame}
+
 \begin{frame}{Publicly available LIDAR for all of Sonoma County, CA}
 \begin{columns}
 \column{0.4\linewidth}
@@ -160,9 +182,13 @@ Convolution kernel:
 
 \textcolor{darkorange}{Sum = 0}
 \column{0.5\linewidth}
-\includegraphics[width=\linewidth]{img/convolution.png}
+\begin{center}
+\includegraphics[width=0.22\linewidth]{img/hillshade-crop-input.png}\,{\Large $\ast$}\,%
+\includegraphics[width=0.18\linewidth]{img/diff-mean-as-kernel.png}\,{\Large $=$}\,%
+\includegraphics[width=0.22\linewidth]{img/diff-mean-elevation.png}
+\end{center}
 
-{\small Convolution animation from Wikipedia}
+{\small input $\ast$ kernel $=$ output --- no animation needed, just \texttt{scipy.signal.convolve2d}.}
 \end{columns}
 \end{frame}
 
@@ -179,6 +205,19 @@ Convolution kernels:
 \textcolor{darkgreen}{Green: east-west indentation}
 
 \textcolor{darkblue}{Blue: north-south indentation}
+\end{columns}
+\end{frame}
+
+\begin{frame}{One-sided cliffs fool the trough kernel}
+\begin{columns}
+\column{0.4\linewidth}
+\includegraphics[width=\linewidth]{img/kernel-cliff-veto.png}
+\column{0.6\linewidth}
+\begin{itemize}
+\item Convolutions with the trough kernel also fire on one-sided cliffs --- usually artificial cliffs along roadsides --- since a cliff matches one side of a trough.
+\item As a veto, we add another kernel that only matches one-sided cliffs: a positive Gaussian on one side of an angled line, negative on the other.
+\item Positive weight on trough convolutions and negative weight on cliff convolutions distinguishes troughs from cliffs.
+\end{itemize}
 \end{columns}
 \end{frame}
 
@@ -224,33 +263,65 @@ Convolution kernels:
 \item Second convolution: use angled kernels again to connect islands.
 \end{itemize}
 \end{itemize}
-\begin{columns}
-\column{0.5\linewidth}
-\includegraphics[width=\linewidth]{img/our-model.png}
+\includegraphics[width=\linewidth]{img/gully-finding-quality.png}
 
-\begin{center}
-Our model
-\end{center}
-\column{0.5\linewidth}
-\includegraphics[width=\linewidth]{img/status-quo.png}
+{\small (a) color-enhanced hillshade; (b) DFME; (c) DFME connected components; (d) two-layer trough convolution; (e) its connected components.}
+\end{frame}
 
+\begin{frame}
+\vfill
 \begin{center}
-Status quo (diff from mean elevation)
+{\Huge Performance optimization with Numba}
 \end{center}
-\end{columns}
+\vfill
+\end{frame}
+
+\begin{frame}{Convolving hundreds of gigabytes with unusually large kernels}
+\begin{itemize}
+\item Typical image convolution kernels are $3\times 3$ through $11\times 11$ pixels.
+\item Ours need to be at least 50 meters on a side to average over enough surrounding elevation: $101\times 101$ pixels.
+\item \texttt{scipy.signal.convolve2d} was too slow for exploratory work at county scale.
+\item GPU drop-in replacements from CuPy and JAX were faster, but still not the fastest.
+\end{itemize}
+
+\vspace{0.3 cm}
+{\ttfamily\small
+\textcolor{darkgrey}{TODO: paste real code}\\
+from scipy.signal import convolve2d\\
+convolved = convolve2d(elevation, kernel, mode="same")
+}
+\end{frame}
+
+\begin{frame}{A custom CUDA kernel with Numba}
+\begin{itemize}
+\item The fastest option: a custom CUDA kernel compiled by Numba.
+\item Fix the kernel size at compile time and simplify boundary conditions.
+\item Process one watershed at a time: pad, convolve, then clip to the watershed (gullies cannot cross a watershed divide).
+\end{itemize}
+
+\vspace{0.3 cm}
+{\ttfamily\small
+\textcolor{darkgrey}{TODO: paste real code}\\
+from numba import cuda\\[2mm]
+@cuda.jit\\
+def convolve\_kernel(image, kernel, out):\\
+\hspace{1em}...
+}
+\end{frame}
+
+\begin{frame}{Numba for skeletonization, too}
+\begin{itemize}
+\item Scikit-Image's skeletonization methods apply to bitmaps, discarding the gully-probability information.
+\item We implemented a distance-ordered homotopic thinning algorithm (inspired by Pudney) as a custom Numba CUDA kernel.
+\item Pixels are eroded greedily in order of increasing probability, rather than distance.
+\item Connectivity is preserved as a constraint, ensuring that all gullies remain trees.
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Final output: a road network/graph}
-\begin{columns}
-\column{0.5\linewidth}
-1. Shrink to centerlines.
+\includegraphics[width=\linewidth]{img/skeletonization-and-graph-building.png}
 
-\includegraphics[width=\linewidth]{img/shrink-to-centerlines.png}
-\column{0.5\linewidth}
-2. Connect segments into a graph.
-
-\includegraphics[width=\linewidth]{img/as-a-graph.png}
-\end{columns}
+{\small Left: skeletonization by probability-ordered erosion. Right: connecting the remaining pixels as a graph.}
 \end{frame}
 
 \begin{frame}{Synergy with the DSI Clinic}
@@ -276,79 +347,72 @@ Status quo (diff from mean elevation)
 \vfill
 \end{frame}
 
-\begin{frame}{Our final product is a set of map layers}
+\begin{frame}{Scale of the data products}
+{\small
 \begin{itemize}
-\item \textcolor{darkorange}{Gully network}
-\item \textcolor{darkblue}{2013 and 2021 aerial photography}
-\item \textcolor{darkblue}{2013 and 2022 elevation data}
-\begin{itemize}
-\item \textcolor{darkblue}{Their difference, which measures erosion and deposition}
+\item Land ownership boundaries --- PMTile --- 27 MB
+\item Ladder fuel proxies --- PMTile, GeoTIFF --- 115 GB
+\item Greyscale hillshade --- PMTile, GeoTIFF --- 2.9 GB
+\item Color-enhanced hillshade --- PMTile, GeoTIFF --- 149 GB
+\item Elevation contours --- PMTile, GeoJSON --- 18 GB
+\item Elevation difference --- PMTile, GeoTIFF --- 5.7 GB
+\item Elevation difference contours --- PMTile, GeoJSON --- 12 GB
+\item Detected gully network --- PMTile, Parquet --- 34 GB
+\item Elevation 2013 \& 2022 --- PMTile, GeoTIFF --- 22 GB
+\item \textbf{Total: 386 GB}
 \end{itemize}
-\item \textcolor{darkblue}{Ladder fuel proxies}
-\item \textcolor{darkgrey}{Land ownership boundaries and addresses (to contact landowners)}
-\end{itemize}
+}
 
-\vspace{0.5 cm}
-We made \href{https://github.com/dsi-clinic/oaec-found-gully?tab=readme-ov-file\#data-products}{a folder of data files} available for GIS experts, but
+\vspace{0.3 cm}
+We made \href{https://github.com/dsi-clinic/gully-map}{all of this available on GitHub} for GIS experts, but
 
 \begin{itemize}
 \item not all users are likely to be experts;
-\item some of these files are huge (up to 150 GB).
+\item some of these files are huge.
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Instead, we built a specialized map webapp}
-\includegraphics[width=\linewidth]{img/webapp.png}
+\includegraphics[width=\linewidth]{img/dashboard.png}
+
+{\small A static, client-side Svelte frontend --- no application server required.}
 \end{frame}
 
 \begin{frame}
 \vfill
 \begin{center}
-{\Huge switch to \href{https://oaec-found-gully.vercel.app/}{live demo}}
+{\Huge switch to \href{https://gully-map.uchicago-dsi.org}{live demo}}
 \end{center}
 \vfill
 \end{frame}
 
 \begin{frame}{Technical highlight}
 \begin{columns}
-\column{0.6\linewidth}
+\column{0.55\linewidth}
 \begin{itemize}
 \item For performance, the visible layers are delivered on demand as tiles.
-\item No server required: the PMTiles file format is addressable one tile at a time.
+\item No server required: the PMTiles file format is addressable one tile at a time, served statically from Cloudflare.
 \item The ``volume of erosion'' and ``elevation along line'' features also use PMTiles to download elevation data one tile at a time.
 \begin{itemize}
 \item But elevation data needs float32 precision, and PMTiles must be RGBA images.
 \item So we bit-cast the four 8-bit channels as a 32-bit float.
-\item The (unshown) images look like this:
 \end{itemize}
 \end{itemize}
-\column{0.4\linewidth}
+
+{\ttfamily\scriptsize
+\textcolor{darkgrey}{TODO: paste real code}\\
+rgba = elevation.astype(">f4").view("u1")
+}
+\column{0.45\linewidth}
 \includegraphics[width=\linewidth]{img/pmtiles-bitcast.png}
 \end{columns}
 \end{frame}
 
-\begin{frame}
-\vfill
-\begin{center}
-{\Huge Impact}
-\end{center}
-\vfill
-\end{frame}
-
-\begin{frame}{This system is for assessing new sites for Fuels to Flows}
+\begin{frame}{Takeaways}
 \begin{itemize}
-\item We rely, in part, on Brock's network of agencies and landowners who might apply Fuels to Flows on their sites.
-\item He has been spreading awareness of our site among his contacts.
-\item We've had two interesting Zoom calls:
-\begin{itemize}
-\item Adam Cummings at \href{https://www.thewatershedcenter.com/}{the Watershed Center}
-\item Matt O'Connor and Jeremy Koor at \href{https://www.oe-i.com/}{O'Connor Environmental, Inc.}
-\end{itemize}
-\item and one known user:
-\begin{itemize}
-\item Fatima Burhan at \href{https://sonomarcd.org/}{Sonoma Resource Conservation District}
-\end{itemize}
-\item The gully map is technically complete, but the networking has just begun!
+\item A practical middle ground between simple filters and deep learning when labels are scarce.
+\item How to insert a custom optimization with Numba when standard functions (\texttt{convolve2d} in various libraries) restrict performance due to unusual conditions.
+\item How to deliver large maps in tiles without requiring a custom server.
 \end{itemize}
 \end{frame}
 
