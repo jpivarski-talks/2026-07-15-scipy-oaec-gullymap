@@ -80,56 +80,85 @@
 %% \only<1>{\includegraphics[width=0.93\linewidth]{img/uchicago-dsi-11th-hour-6.pdf}}\only<2>{\includegraphics[width=0.93\linewidth]{img/uchicago-dsi-11th-hour-5.pdf}}\only<3>{\includegraphics[width=0.93\linewidth]{img/uchicago-dsi-11th-hour-4.pdf}}\only<4>{\includegraphics[width=0.93\linewidth]{img/uchicago-dsi-11th-hour-3.pdf}}\only<5>{\includegraphics[width=0.93\linewidth]{img/uchicago-dsi-11th-hour-2.pdf}}\only<6>{\includegraphics[width=0.93\linewidth]{img/uchicago-dsi-11th-hour-1.pdf}}\only<7>{\includegraphics[width=0.93\linewidth]{img/uchicago-dsi-11th-hour.pdf}}
 %% \end{frame}
 
-\begin{frame}{This talk is about a project with OAEC}
-\vspace{1 cm}
-\Huge
+%% \begin{frame}{This talk is about a project with OAEC}
+%% \vspace{1 cm}
+%% \Huge
+%% \begin{columns}
+%% \column{0.4\linewidth}
+%% \includegraphics[width=\linewidth]{img/dsi-logo.png}
+
+%% \column{0.1\linewidth}
+%% $\leftrightarrow$
+
+%% \column{0.4\linewidth}
+%% \includegraphics[width=\linewidth]{img/oaec-logo.jpg}
+
+%% \end{columns}
+%% \end{frame}
+
+%% \begin{frame}{OAEC's Fuels-to-Flows program}
+%% \vspace{0.25 cm}
+%% \includegraphics[width=\linewidth]{img/fuels-to-flows1-annotated.pdf}
+
+%% \vspace{-7.5 cm}
+%% \hfill \mbox{\includegraphics[height=2 cm]{img/fuels-to-flows-logo.png}\hspace{-1 cm}}
+%% \vspace{7.5 cm}
+%% \end{frame}
+
+%% \begin{frame}{OAEC's Fuels-to-Flows program}
+%% \vspace{0.25 cm}
+%% \hfill \includegraphics[width=0.93\linewidth]{img/fuels-to-flows2.png}\hspace{0.25 cm}
+
+%% \vspace{-7.5 cm}
+%% \hfill \mbox{\includegraphics[height=2 cm]{img/fuels-to-flows-logo.png}\hspace{-1 cm}}
+%% \vspace{7.5 cm}
+%% \end{frame}
+
+%% \begin{frame}{Finding new sites for Fuels-to-Flows}
+%% \vspace{0.25 cm}
+%% \begin{columns}
+%% \column{0.34\linewidth}
+%% \includegraphics[width=\linewidth]{img/oaec-site.png}
+
+%% \column{0.66\linewidth}
+%% \begin{itemize}
+%% \item Fuels-to-Flows has been implemented on the OAEC site and Monte Rio National Park.
+%% \item Program director \textbf{Brock Dolman} wanted to use LiDAR to search for new sites with suitable gullies and ladder fuels throughout Sonoma County.
+%% \item We offered to help!
+%% \end{itemize}
+
+%% \vspace{0.5 cm}
+
+%% \hfill \includegraphics[width=0.4\linewidth]{img/brock.jpg}
+%% \end{columns}
+%% \end{frame}
+
+\begin{frame}{Spot the gullies!}
+\vspace{0.5 cm}
+\only<1>{\includegraphics[width=\linewidth]{img/gullies-aerial.png}}\only<2>{\includegraphics[width=\linewidth]{img/gullies-25.png}}\only<3>{\includegraphics[width=\linewidth]{img/gullies-50.png}}\only<4>{\includegraphics[width=\linewidth]{img/gullies-75.png}}\only<5>{\includegraphics[width=\linewidth]{img/gullies-lidar.png}}\only<6>{\includegraphics[width=\linewidth]{img/gullies-detected.png}}
+\end{frame}
+
+\begin{frame}{Publicly available LiDAR for all of Sonoma County}
+\vspace{0.25 cm}
 \begin{columns}
-\column{0.4\linewidth}
-\includegraphics[width=\linewidth]{img/dsi-logo.png}
+\column{0.6\linewidth}
+\includegraphics[width=0.98\linewidth]{img/sonomavegmap.png}
 
-\column{0.1\linewidth}
-$\leftrightarrow$
-
-\column{0.4\linewidth}
-\includegraphics[width=\linewidth]{img/oaec-logo.jpg}
-
-\end{columns}
-\end{frame}
-
-\begin{frame}{OAEC's Fuels-to-Flows program}
-\vspace{0.25 cm}
-\includegraphics[width=\linewidth]{img/fuels-to-flows1-annotated.pdf}
-
-\vspace{-7.5 cm}
-\hfill \mbox{\includegraphics[height=2 cm]{img/fuels-to-flows-logo.png}\hspace{-1 cm}}
-\vspace{7.5 cm}
-\end{frame}
-
-\begin{frame}{OAEC's Fuels-to-Flows program}
-\vspace{0.25 cm}
-\hfill \includegraphics[width=0.93\linewidth]{img/fuels-to-flows2.png}\hspace{0.25 cm}
-
-\vspace{-7.5 cm}
-\hfill \mbox{\includegraphics[height=2 cm]{img/fuels-to-flows-logo.png}\hspace{-1 cm}}
-\vspace{7.5 cm}
-\end{frame}
-
-\begin{frame}{Finding new sites for Fuels-to-Flows}
-\vspace{0.25 cm}
-\begin{columns}
-\column{0.34\linewidth}
-\includegraphics[width=\linewidth]{img/oaec-site.png}
-
-\column{0.66\linewidth}
-\begin{itemize}
-\item Fuels-to-Flows has been implemented on the OAEC site and Monte Rio National Park.
-\item Program director \textbf{Brock Dolman} wanted to use LiDAR to search for new sites with suitable gullies and ladder fuels throughout Sonoma County.
-\item We offered to help!
+\column{0.43\linewidth}
+\begin{itemize}\setlength{\itemsep}{0.35 cm}
+\item Digital Elevation Model (DEM)
+\begin{itemize}\setlength{\itemsep}{0.15 cm}
+\item absolute elevation above sea~level
+\item grid of $(1/2 \text{ meter})^2$ pixels
+\item full maps in 2013 and 2022
 \end{itemize}
 
-\vspace{0.5 cm}
-
-\hfill \includegraphics[width=0.4\linewidth]{img/brock.jpg}
+\item Ladder fuel proxies
+\begin{itemize}\setlength{\itemsep}{0.15 cm}
+\item (material in 1--4 m) / (material in 0--4 m)
+\item (material in 1--8 m) / (material in 0--8 m)
+\end{itemize}
+\end{itemize}
 \end{columns}
 \end{frame}
 
