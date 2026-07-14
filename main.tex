@@ -58,374 +58,453 @@
 
 % START START START START START START START START START START START START START
 
-%% \begin{frame}{Who am I?}
-%% \large
-%% \vspace{0.25 cm}
-%% \begin{columns}
-%% \column{0.65\linewidth}
-%% \begin{itemize}\setlength{\itemsep}{0.5 cm}
-%% \item Data engineer at the University of Chicago's Data Science Institute (DSI)
-%% \item Member of the DSI's 11th Hour team
-%% \item Former developer of Awkward Array and Scikit-HEP Python packages
-%% \item Former-former particle physicist
-%% \end{itemize}
-
-%% \column{0.3\linewidth}
-%% \includegraphics[width=\linewidth]{img/jim_pivarski.jpg}
-%% \end{columns}
-%% \end{frame}
-
-%% \begin{frame}{How did I end up searching for gullies?}
-%% \vspace{0.15 cm}
-%% \only<1>{\includegraphics[width=0.93\linewidth]{img/uchicago-dsi-11th-hour-6.pdf}}\only<2>{\includegraphics[width=0.93\linewidth]{img/uchicago-dsi-11th-hour-5.pdf}}\only<3>{\includegraphics[width=0.93\linewidth]{img/uchicago-dsi-11th-hour-4.pdf}}\only<4>{\includegraphics[width=0.93\linewidth]{img/uchicago-dsi-11th-hour-3.pdf}}\only<5>{\includegraphics[width=0.93\linewidth]{img/uchicago-dsi-11th-hour-2.pdf}}\only<6>{\includegraphics[width=0.93\linewidth]{img/uchicago-dsi-11th-hour-1.pdf}}\only<7>{\includegraphics[width=0.93\linewidth]{img/uchicago-dsi-11th-hour.pdf}}
-%% \end{frame}
-
-%% \begin{frame}{This talk is about a project with OAEC}
-%% \vspace{1 cm}
-%% \Huge
-%% \begin{columns}
-%% \column{0.4\linewidth}
-%% \includegraphics[width=\linewidth]{img/dsi-logo.png}
-
-%% \column{0.1\linewidth}
-%% $\leftrightarrow$
-
-%% \column{0.4\linewidth}
-%% \includegraphics[width=\linewidth]{img/oaec-logo.jpg}
-
-%% \end{columns}
-%% \end{frame}
-
-%% \begin{frame}{OAEC's Fuels-to-Flows program}
-%% \vspace{0.25 cm}
-%% \includegraphics[width=\linewidth]{img/fuels-to-flows1-annotated.pdf}
-
-%% \vspace{-7.5 cm}
-%% \hfill \mbox{\includegraphics[height=2 cm]{img/fuels-to-flows-logo.png}\hspace{-1 cm}}
-%% \vspace{7.5 cm}
-%% \end{frame}
-
-%% \begin{frame}{OAEC's Fuels-to-Flows program}
-%% \vspace{0.25 cm}
-%% \hfill \includegraphics[width=0.93\linewidth]{img/fuels-to-flows2.png}\hspace{0.25 cm}
-
-%% \vspace{-7.5 cm}
-%% \hfill \mbox{\includegraphics[height=2 cm]{img/fuels-to-flows-logo.png}\hspace{-1 cm}}
-%% \vspace{7.5 cm}
-%% \end{frame}
-
-%% \begin{frame}{Finding new sites for Fuels-to-Flows}
-%% \vspace{0.25 cm}
-%% \begin{columns}
-%% \column{0.34\linewidth}
-%% \includegraphics[width=\linewidth]{img/oaec-site.png}
-
-%% \column{0.66\linewidth}
-%% \begin{itemize}
-%% \item<1-> Fuels-to-Flows has been implemented on the OAEC site and Monte Rio National Park.
-%% \item<2-> Program director \textbf{Brock Dolman} wanted to use LiDAR to search for new sites with suitable gullies and ladder fuels throughout Sonoma County.
-%% \item<3-> We offered to help!
-%% \end{itemize}
-
-%% \vspace{0.5 cm}
-
-%% \uncover<2->{\hfill \includegraphics[width=0.4\linewidth]{img/brock.jpg}}
-%% \end{columns}
-%% \end{frame}
-
-%% \begin{frame}{Spot the gullies!}
-%% \vspace{0.5 cm}
-%% \only<1>{\includegraphics[width=\linewidth]{img/gullies-aerial.png}}\only<2>{\includegraphics[width=\linewidth]{img/gullies-25.png}}\only<3>{\includegraphics[width=\linewidth]{img/gullies-50.png}}\only<4>{\includegraphics[width=\linewidth]{img/gullies-75.png}}\only<5>{\includegraphics[width=\linewidth]{img/gullies-lidar.png}}\only<6>{\includegraphics[width=\linewidth]{img/gullies-detected.png}}
-%% \end{frame}
-
-%% \begin{frame}{Publicly available LiDAR for all of Sonoma County}
-%% \vspace{0.25 cm}
-%% \begin{columns}
-%% \column{0.6\linewidth}
-%% \includegraphics[width=0.98\linewidth]{img/sonomavegmap.png}
-
-%% \column{0.43\linewidth}
-%% \begin{itemize}\setlength{\itemsep}{0.35 cm}
-%% \item Digital Elevation Model (DEM)
-%% \begin{itemize}\setlength{\itemsep}{0.15 cm}
-%% \item absolute elevation above sea~level
-%% \item grid of $(1/2 \text{ meter})^2$ pixels
-%% \item full maps in 2013 and 2022
-%% \end{itemize}
-
-%% \item Ladder fuel proxies
-%% \begin{itemize}\setlength{\itemsep}{0.15 cm}
-%% \item (material in 1--4 m) / (material in 0--4 m)
-%% \item (material in 1--8 m) / (material in 0--8 m)
-%% \end{itemize}
-%% \end{itemize}
-%% \end{columns}
-%% \end{frame}
-
-%% \begin{frame}{Standard technique: difference from mean elevation}
-%% \vspace{0.5 cm}
-%% \begin{columns}
-%% \column{0.6\linewidth}
-%% \begin{itemize}\setlength{\itemsep}{0.25 cm}
-%% \item For example, \href{https://onlinelibrary.wiley.com/doi/epdf/10.1002/esp.1918}{\textcolor{blue}{DOI 10.1002/esp.1918}}.
-%% \item A gully is an indentation in the ground.
-%% \begin{itemize}
-%% \item Subtract the absolute elevation of each pixel from the average in a 25 meter radius.
-%% \end{itemize}
-%% \item Reliably highlights the locations of known gullies on the OAEC site.
-%% \end{itemize}
-
-%% \column{0.4\linewidth}
-%% Applied to OAEC (we know where the gullies are):
-
-%% \vspace{0.1 cm}
-%% \includegraphics[width=\linewidth]{img/diff-mean-elevation.png}
-
-%% \small
-%% \textcolor{red}{Red: known gullies on OAEC site}
-%% \end{columns}
-%% \end{frame}
-
-%% \begin{frame}{Note that ``difference from mean elevation'' is a convolution}
-%% \vspace{0.5 cm}
-%% \begin{columns}
-%% \column{0.4\linewidth}
-%% \textbf{Convolution kernel:}
-
-%% \includegraphics[width=\linewidth]{img/diff-mean-as-kernel.png}
-%% positive central pixel
-
-%% negative disk (25~meter radius)
-
-%% sum = 0
-
-%% \column{0.6\linewidth}
-%% \begin{itemize}
-%% \item For each pixel in the image, center the kernel on that pixel and add image $\times$ kernel over all of its neighbors.
-%% \item This is proportional to pixel minus the average in a disk, centered on that pixel.
-%% \end{itemize}
-
-%% \includegraphics[width=\linewidth]{img/what-is-a-convolution.png}
-%% \end{columns}
-%% \end{frame}
-
-%% \begin{frame}{Fun fact: mice have hawk-shaped kernels in their retinas}
-%% \small
-%% \vspace{0.5 cm}
-%% \begin{columns}
-%% \column{0.35\linewidth}
-%% \includegraphics[width=\linewidth]{img/mouse.png}
-
-%% \column{0.35\linewidth}
-%% \includegraphics[width=\linewidth]{img/hawk-shaped-features.jpg}
-%% \end{columns}
-
-%% \vspace{0.75 cm}
-%% Y.\ Zhang, I.\ Kim, J.\ Sanes, {\it The most numerous ganglion cell type of the mouse retina is a selective feature detector} (2012), \textcolor{blue}{\url{https://doi.org/10.1073/pnas.1211547109}}
-%% \end{frame}
-
-%% \begin{frame}{What if we used a kernel that's \textit{shaped} like a gully?}
-%% \vspace{0.5 cm}
-%% \begin{columns}
-%% \column{0.4\linewidth}
-%% \textbf{Convolution kernels:}
-
-%% \includegraphics[width=\linewidth]{img/trough-convolutions.png}
-%% angle-dependent positive trough
-
-%% negative disk (25~meter radius)
-
-%% sum = 0
-
-%% \column{0.6\linewidth}
-%% \includegraphics[width=\linewidth]{img/orientation-aware-gullies.png}
-
-%% \vspace{-1.5 cm}
-%% \small
-
-%% \textcolor{red}{Red: known gullies on OAEC site}
-
-%% \textcolor{darkgreen}{Green: response to horizontal kernel}
-
-%% \textcolor{blue}{Blue: response to vertical kernel}
-%% \end{columns}
-
-%% \vspace{1.5 cm}
-%% \end{frame}
-
-%% \begin{frame}{This is just like a Convolutional Neural Network (CNN)!}
-%% \vspace{0.25 cm}
-%% \begin{center}
-%% \centering \includegraphics[width=0.9\linewidth]{img/cnn.jpg}
-%% \end{center}
-
-%% \Large
-%% \textbf{Well\ldots\ not ``just like'':}
-%% \begin{itemize}
-%% \item In a CNN, the convolution kernels are \textit{learned}.
-%% \item These kernels are rather large ($101\times 101$ pixels).
-%% \item We have way too little labeled data to supervise image training.
-%% \end{itemize}
-%% \end{frame}
-
-%% \begin{frame}{My day of hand-labeling gullies}
-%% \large
-%% \vspace{0.5 cm}
-%% \begin{columns}
-%% \column{0.5\linewidth}
-%% In nine randomly chosen watersheds (geographic diversity), I painted over pixels that were
-%% \vspace{0.15 cm}
-%% \begin{itemize}
-%% \item definitely in gullies (yellow)
-%% \item definitely not in gullies (purple)
-%% \item neither/uncertain (white)
-%% \end{itemize}
-%% \vspace{0.15 cm}
-%% using Google Maps Street View to verify ground-truth.
-
-%% \vspace{0.5 cm}
-%% (The plot on the right is zoomed-in.)
-
-%% \column{0.5\linewidth}
-%% \includegraphics[width=\linewidth]{img/manual-labeling.png}
-%% \end{columns}
-%% \end{frame}
-
-%% \begin{frame}{The trough-shaped kernel has a false positive}
-%% \vspace{0.35 cm}
-%% \begin{columns}
-%% \column{0.6\linewidth}
-%% \begin{itemize}
-%% \item<1-> The trough-shaped kernel was designed to identify a high-low-high elevation profile.
-%% \item<2-> It half-matches a high-low profile, and therefore matches cliffs.
-%% \item<3-> Very tall artificial cliffs are common along roads, which meander like gullies.
-%% \item<4-> Solution: convolve with another kernel that only matches cliffs.
-
-%% \vspace{0.25 cm}
-%% \uncover<4->{Gully: strong trough, weak cliff-veto.}
-
-%% \vspace{0.25 cm}
-%% \uncover<4->{Cliff: strong trough, strong cliff-veto.}
-%% \end{itemize}
-
-%% \column{0.4\linewidth}
-%% \begin{uncoverenv}<4->
-%% \textbf{Convolution kernel:}
-
-%% \includegraphics[width=\linewidth]{img/kernel-cliff-veto.png}
-%% angle-dependent edge
-
-%% positive Gaussian on one side
-
-%% negative Gaussian on the other
-
-%% sum = 0
-%% \end{uncoverenv}
-%% \end{columns}
-%% \end{frame}
-
-%% \begin{frame}{``Right-sized'' machine learning!}
-%% \vspace{0.35 cm}
-%% \begin{columns}
-%% \column{0.53\linewidth}
-%% We don't have enough labeled data to train (and regularize) an image model, but we can cobble together something that \textit{works like} an image model.
-
-%% \vspace{0.25 cm}
-%% Fixed, manually engineered kernels produce 7 channels; let them float in a linear fit.
-
-%% \vspace{0.5 cm}
-%% Low correlation among 7 parameters + bias:
-
-%% \vspace{0.1 cm}
-%% \includegraphics[width=\linewidth]{img/correlation-matrix.png}
-
-%% \column{0.5\linewidth}
-%% Predicted probabilities for labeled gullies:
-
-%% \vspace{0.1 cm}
-%% \includegraphics[width=\linewidth]{img/residuals.png}
-%% \end{columns}
-%% \end{frame}
-
-%% \begin{frame}{Second layer of the so-called ``CNN''}
-%% \vspace{0.5 cm}
-%% To reduce noise and increase connectivity between real gullies:
-%% \begin{itemize}
-%% \item Pooling: scale gully probability image down by a factor of 2 on each side.
-%% \item Second convolution: use angled kernels again to connect islands.
-%% \end{itemize}
-
-%% \vspace{0.5 cm}
-%% This ``two-layer'' procedure cleans up noise while preserving the major gullies:
-
-%% \vspace{0.1 cm}
-%% \includegraphics[width=\linewidth]{img/gully-finding-quality.png}
-
-%% \small (a) Color-enhanced hillshade; (b) difference from mean elevation (the ``status quo'' method); (c) its connected components; (d) ``two-layer'' trough convolution; (e) its \mbox{connected components.\hspace{-0.5 cm}}
-%% \end{frame}
-
-%% \begin{frame}{Final result: a connected network of gullies (vector, not raster)}
-%% \vspace{0.35 cm}
-%% \begin{centering}
-%% \includegraphics[width=0.95\linewidth]{img/skeletonization-and-graph-building.png}
-%% \end{centering}
-
-%% \small Left: skeletonization by probability-ordered erosion. Right: connecting this skeleton as a graph.
-%% \end{frame}
-
-%% \begin{frame}{So\ldots\ what about Python?}
-%% \large
-%% \vspace{0.5 cm}
-%% All of the analysis shown so far was performed in Python (of course).
-
-%% \vspace{0.1 cm}
-%% NumPy, SciPy, Scikit-Image, GeoPandas, rasterio, affine, pyproj, shapely\ldots
-
-%% \vspace{0.65 cm}
-%% \uncover<2->{However,}
-
-%% \vspace{0.1 cm}
-%% \begin{itemize}
-%% \item<2-> My $101\times 101$ kernels are rather large; SciPy's \mintinline{python}{convolve2d} and its GPU alternatives (including CuPy and JAX) were too slow.
-%% \item<3-> My skeletonization procedure uses a very low probability threshold to include all interesting pixels, so I want to use probability values when searching for the center-line, not just the boolean mask.
-
-%% \vspace{0.1 cm}
-%% My algorithm is a little different from Scikit-Image's \mintinline{python}{skeletonize}.
-%% \end{itemize}
-
-%% \vspace{0.65 cm}
-%% \uncover<4->{So I compiled specialized customizations for these two functions with Numba.}
-%% \end{frame}
-
-%% \begin{frame}{Same principles as in Iason's tutorial (only compile the critical path)}
-%% \vspace{0.25 cm}
-%% \begin{columns}
-%% \column{1.07\linewidth}
-%% \includegraphics[width=\linewidth]{img/convolve2d-skeletonize.png}
-%% \end{columns}
-%% \end{frame}
-
-%% \begin{frame}{Synergy/spin-off in a Data Science Clinic project}
-%% \vspace{0.25 cm}
-%% \begin{itemize}
-%% \item<1-> While working on this, I was also co-mentoring a group of four students who were trying to predict pathologic complete response (pCR) in breast cancer from MRI images using graph neural networks (GNNs).
-%% \item<2-> Jos\'e Cardona extended my skeletonize-with-probability algorithm from 2D elevation to 3D blood vessel voxels and obtained better performance than standard skeletonization.
-%% \item<3-> In the following quarter, it was generalized to 4D (time-series of MRIs) and my co-mentor, Anna Woodard, will be applying it to high time-resolution sequences (beyond the Clinic course).
-%% \end{itemize}
-
-%% \begin{columns}
-%% \column{0.4\linewidth}
-%% \uncover<2->{\includegraphics[width=\linewidth]{img/multidim-centerline.png}}
-%% \column{0.4\linewidth}
-%% \uncover<2->{\includegraphics[width=\linewidth]{img/blood-vessels.png}}
-%% \column{0.2\linewidth}
-%% \uncover<3->{\only<3>{\includegraphics[width=\linewidth]{img/blood-vessels-tumor-3.png}}\only<4>{\includegraphics[width=\linewidth]{img/blood-vessels-tumor-4.png}}\only<5>{\includegraphics[width=\linewidth]{img/blood-vessels-tumor-5.png}}\only<6>{\includegraphics[width=\linewidth]{img/blood-vessels-tumor-6.png}}\only<7>{\includegraphics[width=\linewidth]{img/blood-vessels-tumor-7.png}}\only<8>{\includegraphics[width=\linewidth]{img/blood-vessels-tumor-8.png}}\only<9>{\includegraphics[width=\linewidth]{img/blood-vessels-tumor-9.png}}\only<10>{\includegraphics[width=\linewidth]{img/blood-vessels-tumor-10.png}}\only<11>{\includegraphics[width=\linewidth]{img/blood-vessels-tumor-11.png}}\only<12>{\includegraphics[width=\linewidth]{img/blood-vessels-tumor-12.png}}\only<13>{\includegraphics[width=\linewidth]{img/blood-vessels-tumor-13.png}}}
-%% \end{columns}
-%% \end{frame}
+\begin{frame}{Who am I?}
+\large
+\vspace{0.25 cm}
+\begin{columns}
+\column{0.65\linewidth}
+\begin{itemize}\setlength{\itemsep}{0.5 cm}
+\item Data engineer at the University of Chicago's Data Science Institute (DSI)
+\item Member of the DSI's 11th Hour team
+\item Former developer of Awkward Array and Scikit-HEP Python packages
+\item Former-former particle physicist
+\end{itemize}
+
+\column{0.3\linewidth}
+\includegraphics[width=\linewidth]{img/jim_pivarski.jpg}
+\end{columns}
+\end{frame}
+
+\begin{frame}{How did I end up searching for gullies?}
+\vspace{0.15 cm}
+\only<1>{\includegraphics[width=0.93\linewidth]{img/uchicago-dsi-11th-hour-6.pdf}}\only<2>{\includegraphics[width=0.93\linewidth]{img/uchicago-dsi-11th-hour-5.pdf}}\only<3>{\includegraphics[width=0.93\linewidth]{img/uchicago-dsi-11th-hour-4.pdf}}\only<4>{\includegraphics[width=0.93\linewidth]{img/uchicago-dsi-11th-hour-3.pdf}}\only<5>{\includegraphics[width=0.93\linewidth]{img/uchicago-dsi-11th-hour-2.pdf}}\only<6>{\includegraphics[width=0.93\linewidth]{img/uchicago-dsi-11th-hour-1.pdf}}\only<7>{\includegraphics[width=0.93\linewidth]{img/uchicago-dsi-11th-hour.pdf}}
+\end{frame}
+
+\begin{frame}{This talk is about a project with OAEC}
+\vspace{1 cm}
+\Huge
+\begin{columns}
+\column{0.4\linewidth}
+\includegraphics[width=\linewidth]{img/dsi-logo.png}
+
+\column{0.1\linewidth}
+$\leftrightarrow$
+
+\column{0.4\linewidth}
+\includegraphics[width=\linewidth]{img/oaec-logo.jpg}
+
+\end{columns}
+\end{frame}
+
+\begin{frame}{OAEC's Fuels-to-Flows program}
+\vspace{0.25 cm}
+\includegraphics[width=\linewidth]{img/fuels-to-flows1-annotated.pdf}
+
+\vspace{-7.5 cm}
+\hfill \mbox{\includegraphics[height=2 cm]{img/fuels-to-flows-logo.png}\hspace{-1 cm}}
+\vspace{7.5 cm}
+\end{frame}
+
+\begin{frame}{OAEC's Fuels-to-Flows program}
+\vspace{0.25 cm}
+\hfill \includegraphics[width=0.93\linewidth]{img/fuels-to-flows2.png}\hspace{0.25 cm}
+
+\vspace{-7.5 cm}
+\hfill \mbox{\includegraphics[height=2 cm]{img/fuels-to-flows-logo.png}\hspace{-1 cm}}
+\vspace{7.5 cm}
+\end{frame}
+
+\begin{frame}{Finding new sites for Fuels-to-Flows}
+\vspace{0.25 cm}
+\begin{columns}
+\column{0.34\linewidth}
+\includegraphics[width=\linewidth]{img/oaec-site.png}
+
+\column{0.66\linewidth}
+\begin{itemize}
+\item<1-> Fuels-to-Flows has been implemented on the OAEC site and Monte Rio National Park.
+\item<2-> Program director \textbf{Brock Dolman} wanted to use LiDAR to search for new sites with suitable gullies and ladder fuels throughout Sonoma County.
+\item<3-> We offered to help!
+\end{itemize}
+
+\vspace{0.5 cm}
+
+\uncover<2->{\hfill \includegraphics[width=0.4\linewidth]{img/brock.jpg}}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Spot the gullies!}
+\vspace{0.5 cm}
+\only<1>{\includegraphics[width=\linewidth]{img/gullies-aerial.png}}\only<2>{\includegraphics[width=\linewidth]{img/gullies-25.png}}\only<3>{\includegraphics[width=\linewidth]{img/gullies-50.png}}\only<4>{\includegraphics[width=\linewidth]{img/gullies-75.png}}\only<5>{\includegraphics[width=\linewidth]{img/gullies-lidar.png}}\only<6>{\includegraphics[width=\linewidth]{img/gullies-detected.png}}
+\end{frame}
+
+\begin{frame}{Publicly available LiDAR for all of Sonoma County}
+\vspace{0.25 cm}
+\begin{columns}
+\column{0.6\linewidth}
+\includegraphics[width=0.98\linewidth]{img/sonomavegmap.png}
+
+\column{0.43\linewidth}
+\begin{itemize}\setlength{\itemsep}{0.35 cm}
+\item Digital Elevation Model (DEM)
+\begin{itemize}\setlength{\itemsep}{0.15 cm}
+\item absolute elevation above sea~level
+\item grid of $(1/2 \text{ meter})^2$ pixels
+\item full maps in 2013 and 2022
+\end{itemize}
+
+\item Ladder fuel proxies
+\begin{itemize}\setlength{\itemsep}{0.15 cm}
+\item (material in 1--4 m) / (material in 0--4 m)
+\item (material in 1--8 m) / (material in 0--8 m)
+\end{itemize}
+\end{itemize}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Standard technique: difference from mean elevation}
+\vspace{0.5 cm}
+\begin{columns}
+\column{0.6\linewidth}
+\begin{itemize}\setlength{\itemsep}{0.25 cm}
+\item For example, \href{https://onlinelibrary.wiley.com/doi/epdf/10.1002/esp.1918}{\textcolor{blue}{DOI 10.1002/esp.1918}}.
+\item A gully is an indentation in the ground.
+\begin{itemize}
+\item Subtract the absolute elevation of each pixel from the average in a 25 meter radius.
+\end{itemize}
+\item Reliably highlights the locations of known gullies on the OAEC site.
+\end{itemize}
+
+\column{0.4\linewidth}
+Applied to OAEC (we know where the gullies are):
+
+\vspace{0.1 cm}
+\includegraphics[width=\linewidth]{img/diff-mean-elevation.png}
+
+\small
+\textcolor{red}{Red: known gullies on OAEC site}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Note that ``difference from mean elevation'' is a convolution}
+\vspace{0.5 cm}
+\begin{columns}
+\column{0.4\linewidth}
+\textbf{Convolution kernel:}
+
+\includegraphics[width=\linewidth]{img/diff-mean-as-kernel.png}
+positive central pixel
+
+negative disk (25~meter radius)
+
+sum = 0
+
+\column{0.6\linewidth}
+\begin{itemize}
+\item For each pixel in the image, center the kernel on that pixel and add image $\times$ kernel over all of its neighbors.
+\item This is proportional to pixel minus the average in a disk, centered on that pixel.
+\end{itemize}
+
+\includegraphics[width=\linewidth]{img/what-is-a-convolution.png}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Fun fact: mice have hawk-shaped kernels in their retinas}
+\small
+\vspace{0.5 cm}
+\begin{columns}
+\column{0.35\linewidth}
+\includegraphics[width=\linewidth]{img/mouse.png}
+
+\column{0.35\linewidth}
+\includegraphics[width=\linewidth]{img/hawk-shaped-features.jpg}
+\end{columns}
+
+\vspace{0.75 cm}
+Y.\ Zhang, I.\ Kim, J.\ Sanes, {\it The most numerous ganglion cell type of the mouse retina is a selective feature detector} (2012), \textcolor{blue}{\url{https://doi.org/10.1073/pnas.1211547109}}
+\end{frame}
+
+\begin{frame}{What if we used a kernel that's \textit{shaped} like a gully?}
+\vspace{0.5 cm}
+\begin{columns}
+\column{0.4\linewidth}
+\textbf{Convolution kernels:}
+
+\includegraphics[width=\linewidth]{img/trough-convolutions.png}
+angle-dependent positive trough
+
+negative disk (25~meter radius)
+
+sum = 0
+
+\column{0.6\linewidth}
+\includegraphics[width=\linewidth]{img/orientation-aware-gullies.png}
+
+\vspace{-1.5 cm}
+\small
+
+\textcolor{red}{Red: known gullies on OAEC site}
+
+\textcolor{darkgreen}{Green: response to horizontal kernel}
+
+\textcolor{blue}{Blue: response to vertical kernel}
+\end{columns}
+
+\vspace{1.5 cm}
+\end{frame}
+
+\begin{frame}{This is just like a Convolutional Neural Network (CNN)!}
+\vspace{0.25 cm}
+\begin{center}
+\centering \includegraphics[width=0.9\linewidth]{img/cnn.jpg}
+\end{center}
+
+\Large
+\textbf{Well\ldots\ not ``just like'':}
+\begin{itemize}
+\item In a CNN, the convolution kernels are \textit{learned}.
+\item These kernels are rather large ($101\times 101$ pixels).
+\item We have way too little labeled data to supervise image training.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{My day of hand-labeling gullies}
+\large
+\vspace{0.5 cm}
+\begin{columns}
+\column{0.5\linewidth}
+In nine randomly chosen watersheds (geographic diversity), I painted over pixels that were
+\vspace{0.15 cm}
+\begin{itemize}
+\item definitely in gullies (yellow)
+\item definitely not in gullies (purple)
+\item neither/uncertain (white)
+\end{itemize}
+\vspace{0.15 cm}
+using Google Maps Street View to verify ground-truth.
+
+\vspace{0.5 cm}
+(The plot on the right is zoomed-in.)
+
+\column{0.5\linewidth}
+\includegraphics[width=\linewidth]{img/manual-labeling.png}
+\end{columns}
+\end{frame}
+
+\begin{frame}{The trough-shaped kernel has a false positive}
+\vspace{0.35 cm}
+\begin{columns}
+\column{0.6\linewidth}
+\begin{itemize}
+\item<1-> The trough-shaped kernel was designed to identify a high-low-high elevation profile.
+\item<2-> It half-matches a high-low profile, and therefore matches cliffs.
+\item<3-> Very tall artificial cliffs are common along roads, which meander like gullies.
+\item<4-> Solution: convolve with another kernel that only matches cliffs.
+
+\vspace{0.25 cm}
+\uncover<4->{Gully: strong trough, weak cliff-veto.}
+
+\vspace{0.25 cm}
+\uncover<4->{Cliff: strong trough, strong cliff-veto.}
+\end{itemize}
+
+\column{0.4\linewidth}
+\begin{uncoverenv}<4->
+\textbf{Convolution kernel:}
+
+\includegraphics[width=\linewidth]{img/kernel-cliff-veto.png}
+angle-dependent edge
+
+positive Gaussian on one side
+
+negative Gaussian on the other
+
+sum = 0
+\end{uncoverenv}
+\end{columns}
+\end{frame}
+
+\begin{frame}{``Right-sized'' machine learning!}
+\vspace{0.35 cm}
+\begin{columns}
+\column{0.53\linewidth}
+We don't have enough labeled data to train (and regularize) an image model, but we can cobble together something that \textit{works like} an image model.
+
+\vspace{0.25 cm}
+Fixed, manually engineered kernels produce 7 channels; let them float in a linear fit.
+
+\vspace{0.5 cm}
+Low correlation among 7 parameters + bias:
+
+\vspace{0.1 cm}
+\includegraphics[width=\linewidth]{img/correlation-matrix.png}
+
+\column{0.5\linewidth}
+Predicted probabilities for labeled gullies:
+
+\vspace{0.1 cm}
+\includegraphics[width=\linewidth]{img/residuals.png}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Second layer of the so-called ``CNN''}
+\vspace{0.5 cm}
+To reduce noise and increase connectivity between real gullies:
+\begin{itemize}
+\item Pooling: scale gully probability image down by a factor of 2 on each side.
+\item Second convolution: use angled kernels again to connect islands.
+\end{itemize}
+
+\vspace{0.5 cm}
+This ``two-layer'' procedure cleans up noise while preserving the major gullies:
+
+\vspace{0.1 cm}
+\includegraphics[width=\linewidth]{img/gully-finding-quality.png}
+
+\small (a) Color-enhanced hillshade; (b) difference from mean elevation (the ``status quo'' method); (c) its connected components; (d) ``two-layer'' trough convolution; (e) its \mbox{connected components.\hspace{-0.5 cm}}
+\end{frame}
+
+\begin{frame}{Final result: a connected network of gullies (vector, not raster)}
+\vspace{0.35 cm}
+\begin{centering}
+\includegraphics[width=0.95\linewidth]{img/skeletonization-and-graph-building.png}
+\end{centering}
+
+\small Left: skeletonization by probability-ordered erosion. Right: connecting this skeleton as a graph.
+\end{frame}
+
+\begin{frame}{So\ldots\ what about Python?}
+\large
+\vspace{0.5 cm}
+All of the analysis shown so far was performed in Python (of course).
+
+\vspace{0.1 cm}
+NumPy, SciPy, Scikit-Image, GeoPandas, rasterio, affine, pyproj, shapely\ldots
+
+\vspace{0.65 cm}
+\uncover<2->{However,}
+
+\vspace{0.1 cm}
+\begin{itemize}
+\item<2-> My $101\times 101$ kernels are rather large; SciPy's \mintinline{python}{convolve2d} and its GPU alternatives (including CuPy and JAX) were too slow.
+\item<3-> My skeletonization procedure uses a very low probability threshold to include all interesting pixels, so I want to use probability values when searching for the center-line, not just the boolean mask.
+
+\vspace{0.1 cm}
+My algorithm is a little different from Scikit-Image's \mintinline{python}{skeletonize}.
+\end{itemize}
+
+\vspace{0.65 cm}
+\uncover<4->{So I compiled specialized customizations for these two functions with Numba.}
+\end{frame}
+
+\begin{frame}{Same principles as in Iason's tutorial (only compile the critical path)}
+\vspace{0.25 cm}
+\begin{columns}
+\column{1.07\linewidth}
+\includegraphics[width=\linewidth]{img/convolve2d-skeletonize.png}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Synergy/spin-off in a Data Science Clinic project}
+\vspace{0.25 cm}
+\begin{itemize}
+\item<1-> While working on this, I was also co-mentoring a group of four students who were trying to predict pathologic complete response (pCR) in breast cancer from MRI images using graph neural networks (GNNs).
+\item<2-> Jos\'e Cardona extended my skeletonize-with-probability algorithm from 2D elevation to 3D blood vessel voxels and obtained better performance than standard skeletonization.
+\item<3-> In the following quarter, it was generalized to 4D (time-series of MRIs) and my co-mentor, Anna Woodard, will be applying it to high time-resolution sequences (beyond the Clinic course).
+\end{itemize}
+
+\begin{columns}
+\column{0.4\linewidth}
+\uncover<2->{\includegraphics[width=\linewidth]{img/multidim-centerline.png}}
+\column{0.4\linewidth}
+\uncover<2->{\includegraphics[width=\linewidth]{img/blood-vessels.png}}
+\column{0.2\linewidth}
+\uncover<3->{\only<3>{\includegraphics[width=\linewidth]{img/blood-vessels-tumor-3.png}}\only<4>{\includegraphics[width=\linewidth]{img/blood-vessels-tumor-4.png}}\only<5>{\includegraphics[width=\linewidth]{img/blood-vessels-tumor-5.png}}\only<6>{\includegraphics[width=\linewidth]{img/blood-vessels-tumor-6.png}}\only<7>{\includegraphics[width=\linewidth]{img/blood-vessels-tumor-7.png}}\only<8>{\includegraphics[width=\linewidth]{img/blood-vessels-tumor-8.png}}\only<9>{\includegraphics[width=\linewidth]{img/blood-vessels-tumor-9.png}}\only<10>{\includegraphics[width=\linewidth]{img/blood-vessels-tumor-10.png}}\only<11>{\includegraphics[width=\linewidth]{img/blood-vessels-tumor-11.png}}\only<12>{\includegraphics[width=\linewidth]{img/blood-vessels-tumor-12.png}}\only<13>{\includegraphics[width=\linewidth]{img/blood-vessels-tumor-13.png}}}
+\end{columns}
+\end{frame}
 
 \begin{frame}{Delivering results to OAEC}
+\vspace{0.5 cm}
 
+It's a lot of data:
 
+\vspace{0.25 cm}
+\begin{columns}
+\column{1.1\linewidth}
+\small
+\begin{tabular}{l l l r}
+\hline\hline
+Layer & Derivation & Formats & Size$^{**}$ \\
+\hline
+Land ownership boundaries & Reformatted from Sonoma County GIS & PMTile & 27 MB \\
+Ladder fuel proxies & Reformatted from SVM$^*$ 2022 & PMTile, GeoTIFF & 115 GB \\
+Greyscale hillshade & Reformatted from SVM 2022 & PMTile, GeoTIFF & 2.9 GB \\
+Color-enhanced hillshade & Derived from SVM 2022 data & PMTile, GeoTIFF & 149 GB \\
+Elevation contours & Derived from SVM 2022 data & PMTile, GeoJSON & 18 GB \\
+Elevation difference & Derived from SVM 2013 \& 2022 data & PMTile, GeoTIFF & 5.7 GB \\
+Elevation difference contours & Derived from SVM 2013 \& 2022 data & PMTile, GeoJSON & 12 GB \\
+Detected gully network & Derived from SVM 2022 data & PMTile, Parquet & 34 GB \\
+Elevation 2013 \& 2022 & Reformatted from SVM 2013 \& 2022 & PMTile, GeoTIFF & 22 GB \\
+\hline\hline
+\end{tabular}
+
+\vspace{0.1 cm}
+\hfill $^*$SVM = SonomaVegMap.
+
+\vspace{0.1 cm}
+\hfill $^{**}$Only counting the PMTiles copy.
+\end{columns}
+
+\vspace{0.75 cm}
+And our partners are not GIS experts: ``open this in ArcGIS/QGIS'' is not easy.
+\end{frame}
+
+\begin{frame}{So we built a specialized web app to explore the data}
+\vspace{0.15 cm}
+\begin{columns}
+\column{1.07\linewidth}
+\includegraphics[width=\linewidth]{img/dashboard.png}
+\end{columns}
+\end{frame}
+
+\begin{frame}{PMTiles: a file format everyone should know about}
+\Large
+\vspace{0.5 cm}
+\textcolor{ucred}{\textbf{Problem:}} you want to load data gradually from hierarchical tiles to an interactive map, but you don't want to maintain a server forever.
+
+\vspace{0.5 cm}
+\uncover<2->{\textcolor{ucred}{\textbf{Solution:}} format the data as PMTiles, use Javascript libraries that are PMTiles-aware, and host it somewhere that supports HTTP range requests. The format segregates tiles and indexes for loading.}
+
+\vspace{0.5 cm}
+\begin{uncoverenv}<3->
+\begin{columns}
+\column{0.7\linewidth}
+\begin{columns}
+\column{0.6\linewidth}
+\normalsize
+Hack for non-graphical data: I packed float32 elevations into bytes intended for RGBA, so that client-side functions can draw elevation profiles on the fly.
+
+\column{0.5\linewidth}
+\includegraphics[width=\linewidth]{img/pmtiles-bitcast.png}
+\end{columns}
+\end{columns}
+\end{uncoverenv}
+\end{frame}
+
+\begin{frame}{\mbox{ }}
+\Huge
+\begin{center}
+Jim, don't forget the demo!
+\end{center}
+\end{frame}
+
+\begin{frame}{Takeaways}
+\Large
+\vspace{0.5 cm}
+\begin{itemize}
+\item 
+
+\end{itemize}
 \end{frame}
 
 % HERE HERE HERE HERE HERE HERE HERE HERE HERE HERE HERE HERE HERE HERE
