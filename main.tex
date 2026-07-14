@@ -373,7 +373,58 @@
 %% \small Left: skeletonization by probability-ordered erosion. Right: connecting this skeleton as a graph.
 %% \end{frame}
 
-\begin{frame}{So\ldots\ what about Python?}
+%% \begin{frame}{So\ldots\ what about Python?}
+%% \large
+%% \vspace{0.5 cm}
+%% All of the analysis shown so far was performed in Python (of course).
+
+%% \vspace{0.1 cm}
+%% NumPy, SciPy, Scikit-Image, GeoPandas, rasterio, affine, pyproj, shapely\ldots
+
+%% \vspace{0.65 cm}
+%% \uncover<2->{However,}
+
+%% \vspace{0.1 cm}
+%% \begin{itemize}
+%% \item<2-> My $101\times 101$ kernels are rather large; SciPy's \mintinline{python}{convolve2d} and its GPU alternatives (including CuPy and JAX) were too slow.
+%% \item<3-> My skeletonization procedure uses a very low probability threshold to include all interesting pixels, so I want to use probability values when searching for the center-line, not just the boolean mask.
+
+%% \vspace{0.1 cm}
+%% My algorithm is a little different from Scikit-Image's \mintinline{python}{skeletonize}.
+%% \end{itemize}
+
+%% \vspace{0.65 cm}
+%% \uncover<4->{So I compiled specialized customizations for these two functions with Numba.}
+%% \end{frame}
+
+%% \begin{frame}{Same principles as in Iason's tutorial (only compile the critical path)}
+%% \vspace{0.25 cm}
+%% \begin{columns}
+%% \column{1.07\linewidth}
+%% \includegraphics[width=\linewidth]{img/convolve2d-skeletonize.png}
+%% \end{columns}
+%% \end{frame}
+
+%% \begin{frame}{Synergy/spin-off in a Data Science Clinic project}
+%% \vspace{0.25 cm}
+%% \begin{itemize}
+%% \item<1-> While working on this, I was also co-mentoring a group of four students who were trying to predict pathologic complete response (pCR) in breast cancer from MRI images using graph neural networks (GNNs).
+%% \item<2-> Jos\'e Cardona extended my skeletonize-with-probability algorithm from 2D elevation to 3D blood vessel voxels and obtained better performance than standard skeletonization.
+%% \item<3-> In the following quarter, it was generalized to 4D (time-series of MRIs) and my co-mentor, Anna Woodard, will be applying it to high time-resolution sequences (beyond the Clinic course).
+%% \end{itemize}
+
+%% \begin{columns}
+%% \column{0.4\linewidth}
+%% \uncover<2->{\includegraphics[width=\linewidth]{img/multidim-centerline.png}}
+%% \column{0.4\linewidth}
+%% \uncover<2->{\includegraphics[width=\linewidth]{img/blood-vessels.png}}
+%% \column{0.2\linewidth}
+%% \uncover<3->{\only<3>{\includegraphics[width=\linewidth]{img/blood-vessels-tumor-3.png}}\only<4>{\includegraphics[width=\linewidth]{img/blood-vessels-tumor-4.png}}\only<5>{\includegraphics[width=\linewidth]{img/blood-vessels-tumor-5.png}}\only<6>{\includegraphics[width=\linewidth]{img/blood-vessels-tumor-6.png}}\only<7>{\includegraphics[width=\linewidth]{img/blood-vessels-tumor-7.png}}\only<8>{\includegraphics[width=\linewidth]{img/blood-vessels-tumor-8.png}}\only<9>{\includegraphics[width=\linewidth]{img/blood-vessels-tumor-9.png}}\only<10>{\includegraphics[width=\linewidth]{img/blood-vessels-tumor-10.png}}\only<11>{\includegraphics[width=\linewidth]{img/blood-vessels-tumor-11.png}}\only<12>{\includegraphics[width=\linewidth]{img/blood-vessels-tumor-12.png}}\only<13>{\includegraphics[width=\linewidth]{img/blood-vessels-tumor-13.png}}}
+%% \end{columns}
+%% \end{frame}
+
+\begin{frame}{Delivering results to OAEC}
+
 
 \end{frame}
 
